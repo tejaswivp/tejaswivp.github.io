@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -16,18 +16,19 @@
         /* --- CSS VARIABLES & THEME --- */
         :root {
             --font-main: 'Inter', sans-serif;
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             
             /* Light Theme Defaults */
             --bg-color: #f8f9fa;
             --surface-color: #ffffff;
             --text-primary: #1a1a1a;
-            --text-secondary: #666666;
+            --text-secondary: #4b5563;
             --accent-color: #2563eb; /* Royal Blue */
             --accent-hover: #1d4ed8;
             --border-color: #e5e7eb;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --hero-gradient: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            --glass-bg: rgba(255, 255, 255, 0.8);
         }
 
         [data-theme="dark"] {
@@ -38,11 +39,14 @@
             --accent-color: #60a5fa; /* Lighter Blue */
             --accent-hover: #3b82f6;
             --border-color: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
             --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --glass-bg: rgba(15, 23, 42, 0.8);
         }
 
         /* --- GLOBAL STYLES --- */
+        html { scroll-behavior: smooth; }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -64,10 +68,12 @@
             padding: 0 20px;
         }
 
+        .section-padding { padding: 5rem 0; }
+
         .section-title {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             position: relative;
             display: inline-block;
         }
@@ -89,7 +95,7 @@
             gap: 8px;
             background-color: var(--accent-color);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
@@ -105,14 +111,23 @@
         }
 
         .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: transparent;
             border: 2px solid var(--accent-color);
             color: var(--accent-color);
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
         .btn-outline:hover {
             background: var(--accent-color);
             color: white;
+            transform: translateY(-2px);
         }
 
         /* --- NAVIGATION --- */
@@ -120,9 +135,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(var(--bg-color), 0.8); /* Glassmorphism attempt needs hex-to-rgb logic, simplified here */
-            background-color: var(--bg-color); 
-            backdrop-filter: blur(10px);
+            background-color: var(--glass-bg); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
             padding: 1rem 0;
@@ -134,27 +149,46 @@
             align-items: center;
         }
 
-        .logo { font-weight: 700; font-size: 1.25rem; }
+        .logo { font-weight: 700; font-size: 1.35rem; letter-spacing: -0.5px; }
         .logo span { color: var(--accent-color); }
 
         .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+        .nav-links a { 
+            font-size: 0.95rem; 
+            color: var(--text-secondary); 
+            font-weight: 500; 
+            position: relative;
+        }
         .nav-links a:hover { color: var(--accent-color); }
 
-        /* Theme Toggle */
+        /* Mobile Menu Button (Hidden on Desktop) */
+        .menu-btn { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; }
+
+        /* Theme Toggle Button */
         .theme-toggle {
             background: none;
-            border: none;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             color: var(--text-primary);
-            padding: 5px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
+        .theme-toggle:hover { background: var(--border-color); }
+
+        /* CSS-based Icon Toggling */
+        [data-theme="dark"] .sun-icon { display: block; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="light"] .sun-icon { display: none; }
+        [data-theme="light"] .moon-icon { display: block; }
 
         /* --- HERO SECTION --- */
         .hero {
-            padding-top: 120px;
+            padding-top: 140px;
             padding-bottom: 80px;
             background: var(--hero-gradient);
             min-height: 90vh;
@@ -164,7 +198,7 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 4rem;
             align-items: center;
         }
@@ -173,6 +207,7 @@
             font-size: 3.5rem;
             line-height: 1.1;
             margin-bottom: 1rem;
+            font-weight: 800;
             background: linear-gradient(to right, var(--text-primary), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -182,14 +217,14 @@
             font-size: 1.5rem;
             font-weight: 400;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .hero-text p {
             font-size: 1.1rem;
             color: var(--text-secondary);
             max-width: 500px;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .hero-actions { display: flex; gap: 1rem; }
@@ -200,9 +235,10 @@
             justify-content: center;
         }
 
+        /* Profile Blob Animation */
         .profile-blob {
-            width: 350px;
-            height: 350px;
+            width: 320px;
+            height: 320px;
             background: var(--accent-color);
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             overflow: hidden;
@@ -212,13 +248,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
+            font-size: 4rem;
+            font-weight: bold;
             color: white;
-            background-size: cover;
-            background-position: center;
         }
-        
-        /* Replace with actual image in style attribute or CSS */
+
         .profile-blob.placeholder {
             background: linear-gradient(45deg, var(--accent-color), #8b5cf6);
         }
@@ -240,17 +274,17 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            height: 100%;
+            top: 5px;
+            height: 95%;
             width: 2px;
             background: var(--border-color);
         }
 
         .timeline-item {
             position: relative;
-            padding-left: 2rem;
-            margin-bottom: 3rem;
-            opacity: 0; /* For animation */
+            padding-left: 2.5rem;
+            margin-bottom: 3.5rem;
+            opacity: 0; 
             transform: translateY(20px);
             transition: var(--transition);
         }
@@ -260,29 +294,31 @@
         .timeline-dot {
             position: absolute;
             left: -6px;
-            top: 0;
+            top: 5px;
             width: 14px;
             height: 14px;
             background: var(--accent-color);
             border-radius: 50%;
-            border: 2px solid var(--bg-color);
+            border: 3px solid var(--bg-color);
+            box-shadow: 0 0 0 2px var(--accent-color);
         }
 
-        .job-title { font-size: 1.25rem; font-weight: 700; }
-        .job-org { color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem; }
-        .job-date { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; display: block; }
+        .job-title { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+        .job-org { color: var(--accent-color); font-weight: 600; margin-bottom: 0.25rem; font-size: 1rem; }
+        .job-date { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .timeline-item p { color: var(--text-secondary); }
 
         /* --- PROJECTS GRID --- */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
             background: var(--surface-color);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
             transition: var(--transition);
             opacity: 0;
@@ -290,59 +326,75 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            height: 100%;
         }
 
         .project-card.visible { opacity: 1; transform: translateY(0); }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow);
             border-color: var(--accent-color);
         }
 
-        .project-icon {
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .project-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .project-tech { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 1rem; font-family: monospace; }
-        .project-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .project-header { margin-bottom: 1rem; display: flex; align-items: flex-start; justify-content: space-between; }
+        .project-icon { color: var(--accent-color); background: rgba(37, 99, 235, 0.1); padding: 10px; border-radius: 10px; }
+        
+        .project-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .project-tech { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 1rem; font-family: monospace; font-weight: 600; }
+        .project-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; flex-grow: 1; }
 
         /* --- SKILLS --- */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .skill-tag {
-            background: var(--surface-color);
+            background: var(--bg-color);
             border: 1px solid var(--border-color);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 500;
             transition: var(--transition);
+            color: var(--text-secondary);
         }
 
         .skill-tag:hover {
             background: var(--accent-color);
             color: white;
             border-color: var(--accent-color);
+            transform: translateY(-2px);
         }
+
+        /* --- PUBLICATION CARD --- */
+        .pub-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: var(--transition);
+        }
+        .pub-card:hover { border-color: var(--accent-color); box-shadow: var(--shadow); }
+        .pub-icon { min-width: 50px; height: 50px; background: rgba(37, 99, 235, 0.1); color: var(--accent-color); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 
         /* --- CONTACT & FOOTER --- */
         .contact-section {
             text-align: center;
-            padding: 4rem 0;
+            padding: 4rem 2rem;
             background: var(--surface-color);
-            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
             margin-top: 4rem;
         }
 
         footer {
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -352,50 +404,69 @@
 
         /* --- MEDIA QUERIES --- */
         @media (max-width: 768px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--surface-color);
+                flex-direction: column;
+                padding: 2rem;
+                border-bottom: 1px solid var(--border-color);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .nav-links.active { transform: translateY(0); }
+            .menu-btn { display: block; }
+
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
             .hero-actions { justify-content: center; }
-            .profile-container { order: -1; margin-bottom: 2rem; }
+            .profile-container { order: -1; margin-bottom: 1rem; }
             .hero-text h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Simplified for this demo */
+            
+            .pub-card { flex-direction: column; text-align: center; align-items: center; }
         }
-        
-        .section-padding { padding: 4rem 0; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="container nav-content">
-            <div class="logo">Tejaswi <span> Panchagnula</span></div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#publications">Publications</a>
+            <div class="logo">Tejaswi <span>V.P.</span></div>
+            
+            <button class="menu-btn" id="menuToggle" aria-label="Toggle Menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#about" onclick="closeMenu()">About</a>
+                <a href="#experience" onclick="closeMenu()">Experience</a>
+                <a href="#projects" onclick="closeMenu()">Projects</a>
+                <a href="#publications" onclick="closeMenu()">Publications</a>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
-                    <i data-lucide="moon"></i>
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero" id="about">
         <div class="container hero-grid">
             <div class="hero-text">
                 <h1>Hi, I'm Tejaswi.</h1>
                 <h2>Researcher in Deep Learning & Agentic AI</h2>
-                <p>MS ECE Student at Purdue University. Bridging the gap between human visual perception and scalable AI engineering.</p>
+                <p>Master's Student at Purdue ECE (VIPER Lab). I build systems that bridge human visual perception and scalable AI engineering.</p>
                 <div class="hero-actions">
                     <a href="Tejaswi_CV_Intern-2.pdf" download class="btn">
-                        <i data-lucide="download"></i> Download CV
+                        <i data-lucide="download" size="18"></i> Download CV
                     </a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                    <a href="#contact" class="btn-outline">Contact Me</a>
                 </div>
             </div>
             <div class="profile-container">
-                <div class="profile-blob placeholder">
-                    TP
-                </div>
+                <div class="profile-blob placeholder">TP</div>
             </div>
         </div>
     </section>
@@ -438,17 +509,21 @@
                 
                 <div class="project-card">
                     <div>
-                        <div class="project-icon"><i data-lucide="file-text" size="32"></i></div>
+                        <div class="project-header">
+                            <div class="project-icon"><i data-lucide="file-text" size="28"></i></div>
+                        </div>
                         <h3 class="project-title">Agentic AI PDF Editor</h3>
                         <div class="project-tech">Gemini 2.5 • React • FastAPI • YOLO</div>
                         <p class="project-desc">An intelligent platform using Computer Vision and LLMs to interactively edit PDF forms via natural language commands. Features "Magic Paste" for auto-filling data.</p>
                     </div>
-                    <a href="https://pdf-form-editor-gilt.vercel.app/" target="_blank" class="btn-outline" style="text-align:center; padding: 8px; border-radius: 6px; display:block;">View Demo</a>
+                    <a href="https://pdf-form-editor-gilt.vercel.app/" target="_blank" class="btn-outline" style="justify-content:center; width:100%;">View Live Demo</a>
                 </div>
 
                 <div class="project-card">
                     <div>
-                        <div class="project-icon"><i data-lucide="cloud-lightning" size="32"></i></div>
+                        <div class="project-header">
+                            <div class="project-icon"><i data-lucide="cloud-lightning" size="28"></i></div>
+                        </div>
                         <h3 class="project-title">Autonomous Incident Response</h3>
                         <div class="project-tech">AWS Lambda • Bedrock (Claude) • Python</div>
                         <p class="project-desc">Serverless agent that processes unstructured tickets and executes remediation. Uses constrained decoding for deterministic JSON outputs from stochastic LLMs.</p>
@@ -457,7 +532,9 @@
 
                 <div class="project-card">
                     <div>
-                        <div class="project-icon"><i data-lucide="brain-circuit" size="32"></i></div>
+                        <div class="project-header">
+                            <div class="project-icon"><i data-lucide="brain-circuit" size="28"></i></div>
+                        </div>
                         <h3 class="project-title">Adaptive Cognitive Architecture</h3>
                         <div class="project-tech">PyTorch • LangChain • LLMs</div>
                         <p class="project-desc">Engineered an adaptive system with dynamic routing and self-reflective feedback. Reduced FLOPs by 10-15% compared to static Generative AI models.</p>
@@ -466,7 +543,9 @@
 
                 <div class="project-card">
                     <div>
-                        <div class="project-icon"><i data-lucide="trending-up" size="32"></i></div>
+                        <div class="project-header">
+                            <div class="project-icon"><i data-lucide="trending-up" size="28"></i></div>
+                        </div>
                         <h3 class="project-title">Algorithmic ETF Trading</h3>
                         <div class="project-tech">LightGBM • XGBoost • Python</div>
                         <p class="project-desc">Developed a multi-ETF trading system with volatility filters. Achieved 15.3% CAGR and Sharpe Ratio of 0.87 in backtesting.</p>
@@ -477,7 +556,7 @@
         </div>
     </section>
 
-    <section class="section-padding" style="background-color: var(--surface-color);">
+    <section class="section-padding" style="background-color: var(--surface-color); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-container">
@@ -500,12 +579,16 @@
     <section id="publications" class="section-padding">
         <div class="container">
             <h2 class="section-title">Publications</h2>
-            <div class="project-card visible" style="flex-direction: row; align-items: center; gap: 20px;">
-                <i data-lucide="book-open" size="40" style="color: var(--accent-color);"></i>
+            <div class="pub-card visible">
+                <div class="pub-icon">
+                    <i data-lucide="book-open" size="28"></i>
+                </div>
                 <div>
-                    <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Foraging with the Eyes: Dynamics in Human Visual Gaze and Deep Predictive Modeling (2025)</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Tejaswi V. Panchagnula</p>
-                    <a href="https://arxiv.org/abs/2510.09299" target="_blank" style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem; margin-top: 5px; display: inline-block;">Read on arXiv &rarr;</a>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Foraging with the Eyes: Dynamics in Human Visual Gaze and Deep Predictive Modeling (2025)</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 12px;">Tejaswi V. Panchagnula</p>
+                    <a href="https://arxiv.org/abs/2510.09299" target="_blank" style="color: var(--accent-color); font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                        Read on arXiv <i data-lucide="arrow-up-right" size="16"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -513,12 +596,12 @@
 
     <section id="contact" class="container">
         <div class="contact-section">
-            <h2>Let's Connect</h2>
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Let's Connect</h2>
             <p style="color: var(--text-secondary); margin-bottom: 2rem;">Always open to discussing AI, Computer Vision, or new opportunities.</p>
             <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                <a href="mailto:tpanchag@purdue.edu" class="btn"><i data-lucide="mail"></i> tpanchag@purdue.edu</a>
-                <a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" class="btn btn-outline"><i data-lucide="linkedin"></i> LinkedIn</a>
-                <a href="https://github.com/tejaswivp" target="_blank" class="btn btn-outline"><i data-lucide="github"></i> GitHub</a>
+                <a href="mailto:tpanchag@purdue.edu" class="btn"><i data-lucide="mail" size="18"></i> tpanchag@purdue.edu</a>
+                <a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" class="btn-outline"><i data-lucide="linkedin" size="18"></i> LinkedIn</a>
+                <a href="https://github.com/tejaswivp" target="_blank" class="btn-outline"><i data-lucide="github" size="18"></i> GitHub</a>
             </div>
         </div>
     </section>
@@ -530,38 +613,38 @@
     </footer>
 
     <script>
-        // Initialize Lucide Icons
+        // Initialize Icons
         lucide.createIcons();
 
         // Dark Mode Logic
         const toggleBtn = document.getElementById('themeToggle');
         const html = document.documentElement;
-        const icon = toggleBtn.querySelector('i');
-
-        // Check local storage
+        
+        // Check local storage for theme
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
             html.setAttribute('data-theme', currentTheme);
-            updateIcon(currentTheme);
         }
 
         toggleBtn.addEventListener('click', () => {
             const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
-            updateIcon(theme);
         });
 
-        function updateIcon(theme) {
-            if (theme === 'dark') {
-                icon.setAttribute('data-lucide', 'sun');
-            } else {
-                icon.setAttribute('data-lucide', 'moon');
-            }
-            lucide.createIcons();
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        function closeMenu() {
+            navLinks.classList.remove('active');
         }
 
-        // Scroll Animation Observer
+        // Scroll Animation Logic
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -570,10 +653,9 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.timeline-item, .project-card').forEach((el) => {
+        document.querySelectorAll('.timeline-item, .project-card, .pub-card').forEach((el) => {
             observer.observe(el);
         });
     </script>
 </body>
 </html>
-
