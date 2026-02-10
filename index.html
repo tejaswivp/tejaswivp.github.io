@@ -1,99 +1,578 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tejaswi V. Panchagnula — Resume</title>
-  <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Tejaswi V. Panchagnula — MS ECE (Purdue) | Computer Vision, Deep Learning, Visual Perception" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tejaswi V. Panchagnula | MS ECE Purdue</title>
+    <meta name="description" content="Portfolio of Tejaswi V. Panchagnula - Researcher in Computer Vision, Deep Learning, and Agentic AI.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --font-main: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+            
+            /* Light Theme Defaults */
+            --bg-color: #f8f9fa;
+            --surface-color: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent-color: #2563eb; /* Royal Blue */
+            --accent-hover: #1d4ed8;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --hero-gradient: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #60a5fa; /* Lighter Blue */
+            --accent-hover: #3b82f6;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(var(--bg-color), 0.8); /* Glassmorphism attempt needs hex-to-rgb logic, simplified here */
+            background-color: var(--bg-color); 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: 700; font-size: 1.25rem; }
+        .logo span { color: var(--accent-color); }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background: var(--hero-gradient);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions { display: flex; gap: 1rem; }
+
+        .profile-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-blob {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-color);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            overflow: hidden;
+            animation: morph 8s ease-in-out infinite;
+            border: 4px solid var(--surface-color);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Replace with actual image in style attribute or CSS */
+        .profile-blob.placeholder {
+            background: linear-gradient(45deg, var(--accent-color), #8b5cf6);
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0; /* For animation */
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 2px solid var(--bg-color);
+        }
+
+        .job-title { font-size: 1.25rem; font-weight: 700; }
+        .job-org { color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem; }
+        .job-date { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; display: block; }
+
+        /* --- PROJECTS GRID --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card.visible { opacity: 1; transform: translateY(0); }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .project-icon {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .project-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .project-tech { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 1rem; font-family: monospace; }
+        .project-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+        /* --- SKILLS --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--surface-color);
+            border-radius: 20px;
+            margin-top: 4rem;
+        }
+
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-actions { justify-content: center; }
+            .profile-container { order: -1; margin-bottom: 2rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for this demo */
+        }
+        
+        .section-padding { padding: 4rem 0; }
+    </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="intro">
-        <h1>Tejaswi V. Panchagnula</h1>
-        <p class="sub">MS (ECE), Purdue University — Computer Vision & Deep Learning</p>
-        <p class="contact">
-          <a href="mailto:tejas007@gmail.com">tejas007@gmail.com</a> ⋄
-          <a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" rel="noopener">LinkedIn</a>
-        </p>
-      </div>
-      <div class="cta">
-        <a class="btn" href="Tejaswi_CV_Intern_AI.pdf" download>Download CV (PDF)</a>
-      </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="two-column">
-      <div class="card">
-        <h2>Summary</h2>
-        <p>MS in ECE at Purdue with research background at IIT Madras. Interests: Deep Learning, Computer Vision, Generative Models, Visual Perception, and Human-inspired AI.</p>
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Tejaswi <span>V.P.</span></div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#publications">Publications</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+                    <i data-lucide="moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-        <h3>Technical Skills</h3>
-        <p>Python · PyTorch · TensorFlow · MATLAB · C/C++ · OpenCV · LightGBM · Data Viz · Neural Networks (CNNs, Transformers)</p>
-
-        <h3>Tools & Libraries</h3>
-        <p>Git · Linux · Colab · Docker · scikit-learn · pandas · NumPy</p>
-      </div>
-
-      <div class="card">
-        <h2>Education</h2>
-        <p><strong>Purdue University</strong> — MS, Electrical & Computer Engineering (2025)</p>
-        <p><strong>IIITDM Kancheepuram</strong> — B.Tech, ECE (2020–2024) — CGPA: 8.71</p>
-
-        <h2>Research</h2>
-        <p><strong>Eyes forage like Lévy Walks</strong><br>
-        Large-scale gaze tracking study (4M+ gaze points). MobileNetV2 U-Net for fixation heatmap prediction; bridging statistical foraging and deep learning. (Jan 2023–Jul 2025)</p>
-
-        <p><strong>Adaptive AGI Cognitive Architecture</strong><br>
-        PyTorch cognitive architecture with dynamic routing, surprise-driven reflection, and neurogenesis. (May–Jul 2025)</p>
-      </div>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Hi, I'm Tejaswi.</h1>
+                <h2>Researcher in Deep Learning & Agentic AI</h2>
+                <p>MS ECE Student at Purdue University. Bridging the gap between human visual perception and scalable AI engineering.</p>
+                <div class="hero-actions">
+                    <a href="Tejaswi_CV_Intern-2.pdf" download class="btn">
+                        <i data-lucide="download"></i> Download CV
+                    </a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+            <div class="profile-container">
+                <div class="profile-blob placeholder">
+                    TP
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="card">
-      <h2>Publications</h2>
-      <p><strong><a href="https://arxiv.org/abs/2510.09299" target="_blank" rel="noopener">Gaze Fixation Heatmap Prediction via CNNs: Linking Lévy Foraging and Deep Visual Attention</a></strong><br>
-      <em>Tejaswi V. Panchagnula</em>, et al. arXiv preprint (Oct 2025).<br>
-      Based on the “Eyes Forage like Lévy Walks” project — introduces a MobileNetV2 U-Net trained on 4M+ human gaze points to predict fixation heatmaps, connecting human foraging patterns with computational vision models.</p>
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="job-title">Master of Science, ECE</div>
+                    <div class="job-org">Purdue University (VIPER Lab)</div>
+                    <span class="job-date">Expected May 2027</span>
+                    <p>Focusing on Deep Learning, Computer Vision, and Generative AI. Advised by Dr. Fengqing Maggie Zhu.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="job-title">Research Associate</div>
+                    <div class="job-org">Walmart Center for Tech Excellence, IIT Madras</div>
+                    <span class="job-date">Jun 2024 – Jul 2025</span>
+                    <p>Developed manufacturing data analytics tools, anomaly detection systems, and time-series forecasting pipelines for MSMEs.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="job-title">Research Intern</div>
+                    <div class="job-org">SENAI Lab, IIT Madras</div>
+                    <span class="job-date">Jan 2023 – Jan 2025</span>
+                    <p>Created world's largest human eye gaze dataset (4M+ points). Proved Lévy Walk statistics in human vision and developed MobileNetV2 U-Net models for fixation prediction.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="card">
-      <h2>Selected Projects</h2>
-      <ul class="projects">
-        <li><strong>Algorithmic Trading System</strong> — LightGBM-based ETF trading, technical indicators, trailing stop-loss, volatility filters, backtesting (Sharpe & CAGR improvements).</li>
-        <li><strong>Entropy-based Redundancy Filter</strong> — Image redundancy detection with entropy for compression tasks.</li>
-        <li><strong>EEG Stress Monitor</strong> — Deep-learning proof-of-concept showcased at EHIPASSIKO.</li>
-      </ul>
+    <section id="projects" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div>
+                        <div class="project-icon"><i data-lucide="file-text" size="32"></i></div>
+                        <h3 class="project-title">Agentic AI PDF Editor</h3>
+                        <div class="project-tech">Gemini 2.5 • React • FastAPI • YOLO</div>
+                        <p class="project-desc">An intelligent platform using Computer Vision and LLMs to interactively edit PDF forms via natural language commands. Features "Magic Paste" for auto-filling data.</p>
+                    </div>
+                    <a href="https://pdf-form-editor-gilt.vercel.app/" target="_blank" class="btn-outline" style="text-align:center; padding: 8px; border-radius: 6px; display:block;">View Demo</a>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-icon"><i data-lucide="cloud-lightning" size="32"></i></div>
+                        <h3 class="project-title">Autonomous Incident Response</h3>
+                        <div class="project-tech">AWS Lambda • Bedrock (Claude) • Python</div>
+                        <p class="project-desc">Serverless agent that processes unstructured tickets and executes remediation. Uses constrained decoding for deterministic JSON outputs from stochastic LLMs.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-icon"><i data-lucide="brain-circuit" size="32"></i></div>
+                        <h3 class="project-title">Adaptive Cognitive Architecture</h3>
+                        <div class="project-tech">PyTorch • LangChain • LLMs</div>
+                        <p class="project-desc">Engineered an adaptive system with dynamic routing and self-reflective feedback. Reduced FLOPs by 10-15% compared to static Generative AI models.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-icon"><i data-lucide="trending-up" size="32"></i></div>
+                        <h3 class="project-title">Algorithmic ETF Trading</h3>
+                        <div class="project-tech">LightGBM • XGBoost • Python</div>
+                        <p class="project-desc">Developed a multi-ETF trading system with volatility filters. Achieved 15.3% CAGR and Sharpe Ratio of 0.87 in backtesting.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 
-    <section class="card">
-      <h2>Experience & Leadership</h2>
-      <p><strong>Research Associate</strong>, Walmart Center for Technical Excellence, IIT Madras (Jun 2024–Jul 2025)</p>
-      <p><strong>Research Intern</strong>, SENAI Lab, IIT Madras (May 2022–Jul 2025)</p>
-
-      <h3>Leadership & Activities</h3>
-      <ul>
-        <li>General Affairs Secretary, IIITDM (elected)</li>
-        <li>President, Society for Promotion of Indian Classical Music (SPICMACAY chapter)</li>
-        <li>Class Representative (5 semesters)</li>
-        <li>Veena performer & multi-year basketball medalist</li>
-      </ul>
+    <section class="section-padding" style="background-color: var(--surface-color);">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">C/C++</span>
+                <span class="skill-tag">AWS (Lambda, Bedrock)</span>
+                <span class="skill-tag">LangChain</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">FastAPI</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Git</span>
+            </div>
+        </div>
     </section>
 
-    <section class="card small">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:tejas007@gmail.com">tejas007@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" rel="noopener">tejaswi-panchagnula</a></p>
+    <section id="publications" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="project-card visible" style="flex-direction: row; align-items: center; gap: 20px;">
+                <i data-lucide="book-open" size="40" style="color: var(--accent-color);"></i>
+                <div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Foraging with the Eyes: Dynamics in Human Visual Gaze and Deep Predictive Modeling (2025)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Tejaswi V. Panchagnula</p>
+                    <a href="https://arxiv.org/abs/2510.09299" target="_blank" style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem; margin-top: 5px; display: inline-block;">Read on arXiv &rarr;</a>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© Tejaswi V. Panchagnula — Built by me! • <a href="https://github.com/tejaswivp/tejaswivp.github.io" target="_blank" rel="noopener">Source</a></p> 
-    </div>
-  </footer>
+    <section id="contact" class="container">
+        <div class="contact-section">
+            <h2>Let's Connect</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Always open to discussing AI, Computer Vision, or new opportunities.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="mailto:tpanchag@purdue.edu" class="btn"><i data-lucide="mail"></i> tpanchag@purdue.edu</a>
+                <a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" class="btn btn-outline"><i data-lucide="linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/tejaswivp" target="_blank" class="btn btn-outline"><i data-lucide="github"></i> GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tejaswi V. Panchagnula. Built with code & caffeine.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Dark Mode Logic
+        const toggleBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const icon = toggleBtn.querySelector('i');
+
+        // Check local storage
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            html.setAttribute('data-theme', currentTheme);
+            updateIcon(currentTheme);
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateIcon(theme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                icon.setAttribute('data-lucide', 'sun');
+            } else {
+                icon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons();
+        }
+
+        // Scroll Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.timeline-item, .project-card').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
-
-
