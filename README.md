@@ -16,7 +16,7 @@
 
 ## 🚀 About Me
 
-[cite_start]I am a **Master’s student in Electrical and Computer Engineering** at **Purdue University** (Expected May 2027)[cite: 92], specializing in **Deep Learning**, **Computer Vision**, and **Generative AI**.
+I am a **Master’s student in Electrical and Computer Engineering** at **Purdue University** (Expected May 2027), specializing in **Deep Learning**, **Computer Vision**, and **Generative AI**.
 
 My work lies at the intersection of **scientific research** and **scalable engineering**. I build systems that bridge biological plausibility (like human visual foraging) with practical AI applications (like autonomous cloud agents and document intelligence).
 
@@ -33,7 +33,7 @@ I engineered a full-stack AI platform that uses Computer Vision and LLMs to inte
 - **Computer Vision:** Utilized **YOLO (FFDNet)** and **Tesseract OCR** for intelligent layout analysis and field detection.
 
 ### ☁️ Autonomous Incident Response Agent
-[cite_start]*> Serverless AWS Architecture for IT Triage.* [cite: 133, 145]
+*> Serverless AWS Architecture for IT Triage.* 
 
 Engineered a serverless autonomous agent that processes unstructured natural language tickets and executes remediation actions.
 - **Stack:** **AWS Lambda**, **Amazon Bedrock (Claude 3 Haiku)**, Python.
@@ -45,18 +45,18 @@ Engineered a serverless autonomous agent that processes unstructured natural lan
 ## 🔬 Featured Research
 
 ### 👁️ [Foraging with the Eyes (Gaze Analysis)](https://github.com/tejaswivp/gaze-analysis)
-[cite_start]*Research at SENAI Lab, IIT Madras* [cite: 95, 96]
+*Research at SENAI Lab, IIT Madras* 
 - **Discovery:** Proved that human visual search follows **Lévy Walk statistics**, optimizing the path taken while looking at images.
 - **Deep Learning:** Developed a **MobileNetV2-based U-Net** for fixation prediction.
 - **Impact:** Created one of the world’s largest human eye gaze datasets (**4M+ datapoints**) and achieved **>90% Pearson correlation** with ground truth.
 
 ### 🧠 [Adaptive Cognitive Architecture for LLMs](https://github.com/tejaswivp/fyp)
-[cite_start]*Generative AI Research* [cite: 97]
+*Generative AI Research*
 - **Innovation:** Engineered an adaptive system with dynamic modular AI routing and self-reflective feedback.
 - **Efficiency:** Reallocates computation dynamically to minimize "surprise," achieving a **10-15% reduction in FLOPs** compared to static models and reducing overhead by 50-100ms.
 
 ### 📈 [Algorithmic ETF Trading System](https://github.com/tejaswivp/ETF-analysis-ml)
-[cite_start]*Financial Machine Learning* [cite: 98]
+*Financial Machine Learning* 
 - **Strategy:** A LightGBM/XGBoost-based system with volatility filters and trend-aware exits.
 - **Results:** Achieved a **CAGR of 15.3%** and a **Sharpe Ratio of 0.87** (benchmarked against SPY/QQQ).
 
@@ -65,8 +65,7 @@ Engineered a serverless autonomous agent that processes unstructured natural lan
 ## 📄 Publications
 
 **Foraging with the Eyes: Dynamics in Human Visual Gaze and Deep Predictive Modeling** (2025)  
-[cite_start]*Tejaswi V. Panchagnula* 📄 [Read on arXiv](https://arxiv.org/abs/2510.09299) [cite: 98]
-
+*Tejaswi V. Panchagnula* 📄 [Read on arXiv](https://arxiv.org/abs/2510.09299)
 ---
 
 ## 💻 Technical Stack
@@ -83,19 +82,19 @@ Engineered a serverless autonomous agent that processes unstructured natural lan
 
 ## 💼 Experience Timeline
 
-* **Research Associate** | [cite_start]*Walmart Center for Tech Excellence, IIT Madras* (June 2024 – July 2025) [cite: 94]
+* **Research Associate** | *Walmart Center for Tech Excellence, IIT Madras* (June 2024 – July 2025) 
     * Led a human gaze trajectory study with 80+ subjects.
     * Developed manufacturing analytics tools and time-series forecasting pipelines.
-* **Research Intern** | [cite_start]*SENAI Lab, IIT Madras* (Jan 2023 – Jan 2025) [cite: 95]
+* **Research Intern** | *SENAI Lab, IIT Madras* (Jan 2023 – Jan 2025)
     * Led large-scale gaze data collection and predictive modeling research.
 
 ---
 
 ## 🏆 Leadership & Activities
 
-* [cite_start]**Board Member:** ECE Graduate Student Association, Purdue University (Revived social media & community networking)[cite: 99].
-* [cite_start]**General Affairs Secretary:** Unanimously elected at IIITDM Kancheepuram student body[cite: 99].
-* [cite_start]**Athlete:** Back-to-back **Gold Medalist** (2023, 2024) in Basketball at Inter-IIIT Sports Meets[cite: 99].
+* **Board Member:** ECE Graduate Student Association, Purdue University (Revived social media & community networking).
+* **General Affairs Secretary:** Unanimously elected at IIITDM Kancheepuram student body.
+* **Athlete:** Back-to-back **Gold Medalist** (2023, 2024) in Basketball at Inter-IIIT Sports Meets.
 * **Musician:** Semi-professional **Veena** player.
 
 ---
