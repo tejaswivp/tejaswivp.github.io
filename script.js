@@ -1,24 +1,14 @@
-const header = document.querySelector('[data-header]');
-const menuButton = document.querySelector('[data-menu-button]');
+const menu = document.querySelector('[data-menu]');
 const nav = document.querySelector('[data-nav]');
-const syncHeader = () => header?.classList.toggle('scrolled', window.scrollY > 16);
-syncHeader();
-window.addEventListener('scroll', syncHeader, { passive: true });
-menuButton?.addEventListener('click', () => {
+
+menu?.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', String(open));
+  menu.setAttribute('aria-expanded', String(open));
 });
+
 nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
   nav.classList.remove('open');
-  menuButton?.setAttribute('aria-expanded', 'false');
+  menu?.setAttribute('aria-expanded', 'false');
 }));
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
 document.querySelector('[data-year]').textContent = new Date().getFullYear();
