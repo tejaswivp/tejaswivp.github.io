@@ -54,6 +54,8 @@ img, svg { max-width: 100%; }
 .hero h1 { margin: 1.7rem 0 1.8rem; font-size: clamp(3.4rem, 7vw, 7.1rem); line-height: .92; letter-spacing: -.075em; font-weight: 700; }
 .hero h1 em { color: var(--cyan); font-style: normal; }
 .hero-lede { max-width: 43rem; margin: 0; color: #c3beb3; font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.65; }
+.advisor-link { text-decoration: underline; text-decoration-color: rgba(201,162,39,.55); text-underline-offset: .22em; transition: color .2s, text-decoration-color .2s; }
+.advisor-link:hover, .advisor-link:focus-visible { color: var(--cyan); text-decoration-color: var(--cyan); }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.8rem; margin-top: 2.3rem; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 1.25rem; min-height: 3.5rem; padding: .8rem 1.35rem; border-radius: 999px; font-weight: 700; font-size: .88rem; transition: transform .3s var(--ease), background .3s, color .3s; }
 .button:hover { transform: translateY(-3px); }
