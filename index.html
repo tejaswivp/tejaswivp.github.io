@@ -1,558 +1,141 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tejaswi Panchagnula | MS ECE Purdue</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        /* --- HIGH-END CSS VARIABLES --- */
-        :root {
-            --font-main: 'Inter', sans-serif;
-            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            
-            /* Light Mode */
-            --bg-color: #f8fafc;
-            --surface-color: #ffffff;
-            --surface-hover: #f1f5f9;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --accent-color: #3b82f6; /* Blue */
-            --accent-glow: rgba(59, 130, 246, 0.5);
-            --border-color: #e2e8f0;
-            --nav-bg: rgba(255, 255, 255, 0.85);
-            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-            --hero-gradient: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #0b1120;
-            --surface-color: #1e293b;
-            --surface-hover: #334155;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-color: #60a5fa;
-            --accent-glow: rgba(96, 165, 250, 0.4);
-            --border-color: #334155;
-            --nav-bg: rgba(11, 17, 32, 0.85);
-            --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-            --hero-gradient: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 60%);
-        }
-
-        /* --- GLOBAL RESET --- */
-        html { scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            overflow-x: hidden;
-            background-image: var(--hero-gradient);
-            background-attachment: fixed;
-        }
-
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section-padding { padding: 6rem 0; }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 14px 0 var(--accent-glow);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px 0 var(--accent-glow);
-            opacity: 0.9;
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: transparent;
-            border: 2px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px 26px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            background: rgba(96, 165, 250, 0.05);
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: var(--nav-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--text-primary); }
-        .logo span { color: var(--accent-color); }
-
-        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-        .nav-links a { 
-            font-weight: 500; 
-            color: var(--text-secondary); 
-            font-size: 0.95rem;
-        }
-        .nav-links a:hover { color: var(--accent-color); }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            color: var(--text-primary);
-            transition: var(--transition);
-        }
-        .theme-toggle:hover { border-color: var(--accent-color); color: var(--accent-color); }
-        
-        [data-theme="dark"] .sun-icon { display: block; }
-        [data-theme="dark"] .moon-icon { display: none; }
-        [data-theme="light"] .sun-icon { display: none; }
-        [data-theme="light"] .moon-icon { display: block; }
-
-        /* Mobile Menu */
-        .menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
-
-        /* --- HERO --- */
-        .hero {
-            padding-top: 160px;
-            padding-bottom: 100px;
-            display: flex;
-            align-items: center;
-            min-height: 90vh;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(to right, var(--accent-color), #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-text p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            max-width: 550px;
-        }
-
-        .hero-btns { display: flex; gap: 1rem; }
-
-        .profile-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .blob {
-            width: 400px; height: 400px;
-            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: morph 8s ease-in-out infinite;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow);
-            color: white; font-size: 5rem; font-weight: 800;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .blob::after {
-            content: '';
-            position: absolute;
-            inset: -10px;
-            background: inherit;
-            border-radius: inherit;
-            opacity: 0.3;
-            z-index: -1;
-            filter: blur(20px);
-        }
-
-        @keyframes morph {
-            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        }
-
-        /* --- CARDS & GRID --- */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            display: flex; flex-direction: column; justify-content: space-between;
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow);
-            border-color: var(--accent-color);
-        }
-
-        /* --- EXPERIENCE --- */
-        .timeline {
-            border-left: 2px solid var(--border-color);
-            margin-left: 10px;
-            padding-left: 40px;
-        }
-
-        .timeline-item { position: relative; margin-bottom: 3rem; }
-        .timeline-item:last-child { margin-bottom: 0; }
-        
-        .timeline-dot {
-            position: absolute;
-            left: -47px; top: 5px;
-            width: 16px; height: 16px;
-            background: var(--accent-color);
-            border: 4px solid var(--bg-color);
-            border-radius: 50%;
-        }
-
-        .exp-role { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
-        .exp-company { font-size: 1rem; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem; }
-        .exp-date { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; display: block; }
-
-        /* --- PROJECTS --- */
-        .proj-icon {
-            width: 50px; height: 50px;
-            background: var(--surface-hover);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .proj-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .proj-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
-        .tag { font-size: 0.8rem; background: var(--surface-hover); color: var(--text-secondary); padding: 4px 10px; border-radius: 6px; font-weight: 600; font-family: monospace; }
-        .proj-desc { color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem; flex-grow: 1; }
-
-        /* --- SKILLS --- */
-        .skill-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .skill-pill {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-        .skill-pill:hover { border-color: var(--accent-color); color: var(--accent-color); transform: translateY(-3px); }
-
-        /* --- ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-text h1 { font-size: 3rem; }
-            .hero-btns { justify-content: center; }
-            .blob { width: 300px; height: 300px; margin: 0 auto; margin-bottom: 2rem; }
-            .profile-container { order: -1; }
-            
-            .nav-links {
-                position: fixed; top: 70px; left: 0; width: 100%;
-                background: var(--surface-color);
-                flex-direction: column; padding: 2rem;
-                border-bottom: 1px solid var(--border-color);
-                transform: translateY(-150%); transition: transform 0.3s ease;
-            }
-            .nav-links.active { transform: translateY(0); }
-            .menu-btn { display: block; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tejaswi V. Panchagnula is an AI researcher at Purdue working across computer vision, large language models, and agentic systems.">
+  <meta name="theme-color" content="#07111f">
+  <meta property="og:title" content="Tejaswi V. Panchagnula — AI Researcher &amp; Builder">
+  <meta property="og:description" content="Research in computer vision, LLM alignment, and adaptive AI systems at Purdue University.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tejaswivp.github.io/">
+  <title>Tejaswi V. Panchagnula — AI Researcher &amp; Builder</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell nav-wrap">
+      <a class="brand" href="#top" aria-label="Tejaswi Panchagnula, home"><span class="brand-mark">TVP</span><span class="brand-status"><i></i> Purdue · VIPER Lab</span></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button><span></span><span></span><span></span><span class="sr-only">Toggle navigation</span></button>
+      <nav class="nav-links" id="site-nav" data-nav>
+        <a href="#research">Research</a><a href="#work">Selected work</a><a href="#about">About</a>
+        <a class="nav-resume" href="Tejaswi_Panchagnula_Resume.pdf" target="_blank" rel="noopener">Résumé <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
 
-    <nav>
-        <div class="container nav-content">
-            <div class="logo">Tejaswi <span>Panchagnula</span></div>
-            
-            <button class="menu-btn" id="menuToggle"><i data-lucide="menu"></i></button>
-
-            <div class="nav-links" id="navLinks">
-                <a href="#about" onclick="closeMenu()">About</a>
-                <a href="#experience" onclick="closeMenu()">Experience</a>
-                <a href="#projects" onclick="closeMenu()">Projects</a>
-                <a href="#publications" onclick="closeMenu()">Publications</a>
-                <button class="theme-toggle" id="themeToggle">
-                    <i data-lucide="sun" class="sun-icon"></i>
-                    <i data-lucide="moon" class="moon-icon"></i>
-                </button>
-            </div>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span>AI researcher + systems builder</span><b>01</b></div>
+          <h1>Building AI that<br><em>adapts with intent.</em></h1>
+          <p class="hero-lede">I’m Tejaswi, a graduate researcher at Purdue’s VIPER Lab working across computer vision, LLMs, and agentic AI—advised by Dr. Fengqing Maggie Zhu.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#research">Explore my research <span>↓</span></a>
+            <a class="text-link" href="mailto:tpanchag@purdue.edu">tpanchag@purdue.edu <span>↗</span></a>
+          </div>
         </div>
-    </nav>
-
-    <section id="about" class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text reveal">
-                <h1>Bridging Vision & <br><span class="gradient-text">Agentic AI</span></h1>
-                <p>MS ECE Student at Purdue University (VIPER Lab). I build scalable AI systems that understand the visual world like humans do.</p>
-                <div class="hero-btns">
-                    <a href="Tejaswi_CV_Intern-2.pdf" download class="btn">
-                        <i data-lucide="file-down"></i> Download CV
-                    </a>
-                    <a href="mailto:tpanchag@purdue.edu" class="btn-outline">
-                        <i data-lucide="mail"></i> Contact Me
-                    </a>
-                </div>
-            </div>
-            <div class="profile-container reveal">
-                <div class="blob">TP</div>
-            </div>
-        </div>
+        <aside class="hero-panel reveal" aria-label="Current focus">
+          <div class="panel-topline"><span>Current focus</span><span class="live-dot">Researching now</span></div>
+          <div class="focus-diagram" aria-hidden="true">
+            <span class="focus-node node-vision">Vision</span><span class="focus-node node-agents">Agents</span><span class="focus-node node-llm">LLMs</span><span class="focus-core">adaptive<br>intelligence</span>
+            <svg viewBox="0 0 420 280" preserveAspectRatio="none"><path d="M82 58 C150 58 146 138 210 140"></path><path d="M337 58 C270 58 274 138 210 140"></path><path d="M210 246 C210 206 210 183 210 140"></path></svg>
+          </div>
+          <div class="panel-footer"><span>Graduate Research Assistant</span><span>West Lafayette, IN</span></div>
+        </aside>
+      </div>
+      <div class="shell signal-strip reveal" aria-label="Selected highlights">
+        <div><strong>3</strong><span>research papers</span></div><div><strong>4M+</strong><span>gaze data points</span></div><div><strong>1st</strong><span>Purdue Chips &amp; AI Hackathon</span></div>
+      </div>
     </section>
 
-    <section id="experience" class="section-padding">
-        <div class="container">
-            <h2 class="section-title reveal">Experience</h2>
-            <div class="timeline">
-                
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="exp-role">Master of Science, ECE</div>
-                    <div class="exp-company">Purdue University (VIPER Lab)</div>
-                    <span class="exp-date">Expected May 2027</span>
-                    <p style="color:var(--text-secondary)">Researching Deep Learning, Computer Vision, and Generative AI. Advised by Dr. Fengqing Maggie Zhu.</p>
-                </div>
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="exp-role">Research Associate</div>
-                    <div class="exp-company">Walmart Center for Tech Excellence, IIT Madras</div>
-                    <span class="exp-date">Jun 2024 – Jul 2025</span>
-                    <p style="color:var(--text-secondary)">Developed manufacturing analytics tools and time-series forecasting pipelines for MSMEs.</p>
-                </div>
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="exp-role">Research Intern</div>
-                    <div class="exp-company">SENAI Lab, IIT Madras</div>
-                    <span class="exp-date">Jan 2023 – Jan 2025</span>
-                    <p style="color:var(--text-secondary)">Created largest human eye gaze dataset (4M+ points). Proved Lévy Walk statistics in vision.</p>
-                </div>
-
-            </div>
+    <section class="section research-section" id="research">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><span class="section-index">02 / Publications</span><h2>Selected research.</h2></div>
+          <p>Efficient, adaptive systems across scientific vision, language-model alignment, and human perception.</p>
         </div>
+        <div class="publication-list">
+          <article class="publication reveal">
+            <div class="pub-number">01</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span>Computer vision</span><span>2026 · Under review</span></div>
+              <h3>One-Shot Adaptive Segmentation for Scientific Images</h3>
+              <p>Training-free DINOv3–SAM adaptation from a single annotated reference image.</p>
+              <p class="authors"><b>Tejaswi V. Panchagnula</b>, Allison M. Davis, Fengqing Zhu</p>
+            </div>
+            <a class="pub-link" href="https://arxiv.org/abs/2610.10306" target="_blank" rel="noopener" aria-label="Read One-Shot Adaptive Segmentation on arXiv">arXiv <span>↗</span></a>
+          </article>
+          <article class="publication reveal">
+            <div class="pub-number">02</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span>LLM alignment</span><span>IEEE MMSP · 2026</span></div>
+              <h3>Inference-Time Mitigation of Adversarial Political Bias in Large Language Models</h3>
+              <p>Inference-time self-correction raises political-neutrality scores from 2.14 to 4.56.</p>
+              <p class="authors"><b>Tejaswi V. Panchagnula</b>, Bruce Coburn, Bryce J. Dietrich, Robert X. Browning, Edward J. Delp, Fengqing Zhu</p>
+            </div>
+            <a class="pub-link" href="https://arxiv.org/abs/2608.14629" target="_blank" rel="noopener" aria-label="Read Inference-Time Mitigation on arXiv">arXiv <span>↗</span></a>
+          </article>
+          <article class="publication reveal">
+            <div class="pub-number">03</div>
+            <div class="pub-body">
+              <div class="pub-meta"><span>Human vision</span><span>2025</span></div>
+              <h3>Foraging with the Eyes: Dynamics in Human Visual Gaze and Deep Predictive Modeling</h3>
+              <p>A four-million-point gaze study connecting human visual search to Lévy-walk dynamics.</p>
+              <p class="authors"><b>Tejaswi V. Panchagnula</b></p>
+            </div>
+            <a class="pub-link" href="https://arxiv.org/abs/2510.09299" target="_blank" rel="noopener" aria-label="Read Foraging with the Eyes on arXiv">arXiv <span>↗</span></a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="projects" class="section-padding" style="background-color: var(--surface-hover);">
-        <div class="container">
-            <h2 class="section-title reveal">Featured Projects</h2>
-            <div class="grid-layout">
-
-                <div class="card reveal">
-                    <div>
-                        <div class="proj-icon"><i data-lucide="file-text" size="28"></i></div>
-                        <h3 class="proj-title">Agentic AI PDF Editor</h3>
-                        <div class="proj-tags">
-                            <span class="tag">Gemini 2.5</span>
-                            <span class="tag">React</span>
-                            <span class="tag">YOLO</span>
-                        </div>
-                        <p class="proj-desc">Interactive document platform using Computer Vision and LLMs to edit PDF forms via natural language commands.</p>
-                    </div>
-                    <a href="https://pdf-form-editor-gilt.vercel.app/" target="_blank" class="btn-outline" style="width:100%; justify-content:center;">View Live Demo</a>
-                </div>
-
-                <div class="card reveal">
-                    <div>
-                        <div class="proj-icon"><i data-lucide="cloud-lightning" size="28"></i></div>
-                        <h3 class="proj-title">Autonomous Incident Response</h3>
-                        <div class="proj-tags">
-                            <span class="tag">AWS Lambda</span>
-                            <span class="tag">Claude 3</span>
-                            <span class="tag">Python</span>
-                        </div>
-                        <p class="proj-desc">Serverless agent that processes IT tickets and executes remediation with deterministic safety checks.</p>
-                    </div>
-                </div>
-
-                <div class="card reveal">
-                    <div>
-                        <div class="proj-icon"><i data-lucide="brain-circuit" size="28"></i></div>
-                        <h3 class="proj-title">Adaptive Cognitive Architecture</h3>
-                        <div class="proj-tags">
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">LangChain</span>
-                        </div>
-                        <p class="proj-desc">Self-reflective AI system with dynamic routing that reduced FLOPs by 10-15% vs static models.</p>
-                    </div>
-                </div>
-
+    <section class="section work-section" id="work">
+      <div class="shell">
+        <div class="section-heading reveal"><div><span class="section-index">03 / Selected work</span><h2>Built, not just proposed.</h2></div><p>Two systems that turn research ideas into working prototypes.</p></div>
+        <article class="pdf-feature reveal">
+          <div class="feature-copy">
+            <span class="project-kicker"><i></i> Live product</span><h3>Agentic AI<br>PDF Editor</h3>
+            <p>A conversational document platform that uses computer vision, OCR, and an editing agent to modify PDF forms from natural-language instructions.</p>
+            <ul class="feature-stack" aria-label="Technology stack"><li>Gemini 2.5</li><li>React + Konva</li><li>FastAPI</li><li>YOLO + OCR</li></ul>
+            <a class="button button-light" href="https://pdf-form-editor-gilt.vercel.app/" target="_blank" rel="noopener">Launch the editor <span>↗</span></a>
+          </div>
+          <div class="editor-visual" aria-label="Illustration of the PDF editor interface">
+            <div class="editor-shell">
+              <div class="editor-chrome"><div class="chrome-dots"><i></i><i></i><i></i></div><span>agentic-pdf / workspace</span><span class="secure">● live</span></div>
+              <div class="editor-layout">
+                <div class="editor-toolbar"><b>Document</b><span class="tool-active">⌁</span><span>T</span><span>□</span><span>⌕</span><i></i><span>82%</span></div>
+                <div class="document-stage"><div class="paper"><div class="paper-title"></div><div class="paper-sub"></div><div class="paper-grid"><span></span><span></span></div><div class="paper-label"></div><div class="paper-field selected-field"><small>Full name</small><b>Tejaswi V. Panchagnula</b><em>✓</em></div><div class="paper-label short"></div><div class="paper-field"></div><div class="paper-label"></div><div class="paper-field small-field"></div><div class="paper-sign"></div></div></div>
+                <div class="agent-panel"><div class="agent-heading"><span class="agent-avatar">A</span><div><b>Document agent</b><small>Ready</small></div></div><div class="agent-message">I found 8 editable fields in this document.</div><div class="user-message">Fill in my name and set today’s date.</div><div class="agent-action"><span>✓</span><div><b>2 changes applied</b><small>Name · Date</small></div></div><div class="agent-input">Ask the document… <span>↗</span></div></div>
+              </div>
             </div>
+          </div>
+        </article>
+
+        <div class="project-grid">
+          <article class="project-card project-winner reveal"><div class="card-top"><span class="project-number">01</span><span class="award-chip">🏆 1st place · 2026</span></div><div><h3>Compute Commons</h3><p>A distributed AI-training network that pools idle community devices, coordinating data-parallel and model-sharded learning across heterogeneous hardware.</p></div><div class="card-footer"><span>PyTorch · MLX · WebSockets · Streamlit</span><span>Purdue Chips &amp; AI Hackathon</span></div></article>
+          <article class="project-card reveal"><div class="card-top"><span class="project-number">02</span><a href="https://github.com/tejaswivp/gaze-analysis" target="_blank" rel="noopener">GitHub ↗</a></div><div><h3>Gaze Analysis</h3><p>Large-scale gaze dynamics and predictive fixation modeling: from Lévy-walk statistics to MobileNetV2 U-Net heatmaps with over 90% Pearson correlation.</p></div><div class="card-footer"><span>PyTorch · Computer Vision</span><span>SENAI Lab · IIT Madras</span></div></article>
         </div>
+      </div>
     </section>
 
-    <section class="section-padding">
-        <div class="container">
-            <h2 class="section-title reveal">Technical Skills</h2>
-            <div class="skill-grid reveal">
-                <div class="skill-pill">Python</div>
-                <div class="skill-pill">PyTorch</div>
-                <div class="skill-pill">TensorFlow</div>
-                <div class="skill-pill">C++</div>
-                <div class="skill-pill">AWS (Lambda, Bedrock)</div>
-                <div class="skill-pill">LangChain</div>
-                <div class="skill-pill">OpenCV</div>
-                <div class="skill-pill">FastAPI</div>
-                <div class="skill-pill">React</div>
-                <div class="skill-pill">Docker</div>
-            </div>
-        </div>
+    <section class="section about-section" id="about">
+      <div class="shell about-grid">
+        <div class="about-statement reveal"><span class="section-index">04 / About</span><h2>Research with a builder’s instinct.</h2></div>
+        <div class="about-copy reveal"><p>I’m an M.S. student in Electrical and Computer Engineering at Purdue University and a Graduate Research Assistant in the VIPER Lab, advised by <strong>Dr. Fengqing Maggie Zhu</strong>. I will begin my Ph.D. in Fall 2027.</p><p>Previously: Research Associate at the Walmart Center for Tech Excellence and Research Intern at SENAI Lab, IIT Madras.</p><div class="skills"><span>Python</span><span>PyTorch</span><span>vLLM</span><span>LangChain</span><span>OpenCV</span><span>AWS</span></div></div>
+      </div>
     </section>
 
-    <section id="publications" class="section-padding" style="background-color: var(--surface-hover);">
-        <div class="container">
-            <h2 class="section-title reveal">Publications</h2>
-            <div class="card reveal" style="flex-direction: row; align-items: center; gap: 2rem; padding: 2rem;">
-                <div class="proj-icon" style="margin:0; width: 60px; height: 60px;"><i data-lucide="book-open" size="32"></i></div>
-                <div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 5px;">Foraging with the Eyes: Dynamics in Human Visual Gaze and Deep Predictive Modeling (2025)</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 10px;">Tejaswi V. Panchagnula</p>
-                    <a href="https://arxiv.org/abs/2510.09299" target="_blank" style="color: var(--accent-color); font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
-                        Read on arXiv <i data-lucide="arrow-up-right" size="16"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <a href="mailto:tpanchag@purdue.edu" class="btn-outline" style="padding: 10px;"><i data-lucide="mail"></i></a>
-                <a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" class="btn-outline" style="padding: 10px;"><i data-lucide="linkedin"></i></a>
-                <a href="https://github.com/tejaswivp" target="_blank" class="btn-outline" style="padding: 10px;"><i data-lucide="github"></i></a>
-            </div>
-            <p>© 2026 Tejaswi Panchagnula. Built with Agentic AI.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Icons
-        lucide.createIcons();
-
-        // Theme Toggle
-        const toggleBtn = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        // Load Saved Theme
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme) html.setAttribute('data-theme', currentTheme);
-
-        toggleBtn.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        });
-
-        // Mobile Menu
-        const menuBtn = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-        function closeMenu() { navLinks.classList.remove('active'); }
-
-        // Scroll Animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    <section class="contact-section"><div class="shell contact-grid reveal"><div><span class="section-index">05 / Connect</span><h2>Let’s talk research.</h2></div><div class="contact-actions"><a class="button button-primary" href="mailto:tpanchag@purdue.edu">Start a conversation <span>↗</span></a><div class="social-links"><a href="https://www.linkedin.com/in/tejaswivp/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/tejaswivp" target="_blank" rel="noopener">GitHub ↗</a><a href="Tejaswi_Panchagnula_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a></div></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="shell"><span>© <span data-year></span> Tejaswi V. Panchagnula</span><span>Designed for clarity. Built with intent.</span><a href="#top">Back to top ↑</a></div></footer>
 </body>
 </html>
