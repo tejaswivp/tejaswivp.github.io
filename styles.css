@@ -36,12 +36,6 @@ h1 { margin: 1.2rem 0 0; font-size: clamp(4rem, 9vw, 8.4rem); line-height: .86; 
 .button { padding: .78rem 1rem; background: var(--text); color: white; font-size: .82rem; }
 .button:hover { background: var(--gold); }
 .plain-link { font-size: .82rem; }
-.metrics { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 6rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.metrics div { display: flex; align-items: baseline; gap: .75rem; padding: 1.4rem 0; }
-.metrics div + div { padding-left: 1.5rem; border-left: 1px solid var(--line); }
-.metrics strong { font-size: 1.65rem; letter-spacing: -.04em; }
-.metrics span { color: var(--muted); font: 500 .65rem "DM Mono", monospace; text-transform: uppercase; }
-
 .section { padding: 6.5rem 0; }
 .section-heading { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; margin-bottom: 2.5rem; align-items: baseline; }
 .section-label { margin: 0; }
@@ -88,8 +82,6 @@ footer { padding: 4rem 0 2rem; background: var(--text); color: white; }
   .hero { padding-top: 4.5rem; }
   .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   h1 { font-size: clamp(3.7rem, 19vw, 6rem); }
-  .metrics { grid-template-columns: 1fr; margin-top: 4rem; }
-  .metrics div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
   .section { padding: 4.5rem 0; }
   .section-heading { grid-template-columns: 1fr; gap: 1rem; }
   .row { grid-template-columns: 1fr; gap: .8rem; }
